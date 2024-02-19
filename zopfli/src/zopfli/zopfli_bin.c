@@ -148,7 +148,7 @@ static char StringsEqual(const char* str1, const char* str2) {
 int main(int argc, char* argv[]) {
   HANDLE hProcess = GetCurrentProcess();
   HANDLE hThread = GetCurrentThread();
-  SetPriorityClass(hProcess, HIGH_PRIORITY_CLASS);
+  SetPriorityClass(hProcess, REALTIME_PRIORITY_CLASS);
   SetThreadPriority(hThread, THREAD_PRIORITY_TIME_CRITICAL);
   ZopfliOptions options;
   ZopfliFormat output_type = ZOPFLI_FORMAT_GZIP;
