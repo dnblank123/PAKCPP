@@ -99,26 +99,6 @@ if(UNIX AND NOT (BEOS OR HAIKU))
   target_link_libraries(libzopfli m)
 endif()
 
-#
-# libzopflipng
-#
-add_library(libzopflipng ${zopfli_library_type}
-  src/zopflipng/zopflipng_lib.cc
-  src/zopflipng/lodepng/lodepng.cpp
-  src/zopflipng/lodepng/lodepng_util.cpp
-)
-target_link_libraries(libzopflipng libzopfli)
-target_include_directories(libzopflipng
-  INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src/zopflipng>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-)
-set_target_properties(libzopflipng PROPERTIES
-  OUTPUT_NAME zopflipng
-  VERSION ${ZOPFLI_VERSION}
-  SOVERSION ${ZOPFLI_VERSION_MAJOR}
-)
-
 # MSVC does not export symbols by default when building a DLL, this is a
 # workaround for recent versions of CMake
 if(MSVC AND ZOPFLI_BUILD_SHARED)
@@ -139,14 +119,6 @@ if(MSVC)
   target_compile_definitions(zopfli PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
-#
-# zopflipng
-#
-add_executable(zopflipng src/zopflipng/zopflipng_bin.cc)
-target_link_libraries(zopflipng libzopflipng)
-if(MSVC)
-  target_compile_definitions(zopflipng PRIVATE _CRT_SECURE_NO_WARNINGS)
-endif()
 
 # Create aliases
 #
@@ -154,9 +126,7 @@ endif()
 # same names as in the config file package.
 if(NOT CMAKE_VERSION VERSION_LESS 3.0)
   add_library(Zopfli::libzopfli ALIAS libzopfli)
-  add_library(Zopfli::libzopflipng ALIAS libzopflipng)
   add_executable(Zopfli::zopfli ALIAS zopfli)
-  add_executable(Zopfli::zopflipng ALIAS zopflipng)
 endif()
 
 #
@@ -164,13 +134,13 @@ endif()
 #
 if(ZOPFLI_BUILD_INSTALL)
   # Install binaries, libraries, and headers
-  install(TARGETS libzopfli libzopflipng zopfli zopflipng
+  install(TARGETS libzopfli zopfli
     EXPORT ZopfliTargets
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   )
-  install(FILES src/zopfli/zopfli.h src/zopflipng/zopflipng_lib.h
+  install(FILES src/zopfli/zopfli.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
   )
 
