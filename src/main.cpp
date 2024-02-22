@@ -17,12 +17,10 @@
 int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 {
     size_t filecount = 0;
-    std::filesystem::path file{ FileLoc };
     std::cout << "List of files: \n";
     ZopfliOptions options;
     ZopfliInitOptions(&options);
-    options.numiterations = 30;
-    options.blocksplittingmax = 0;
+    options.numiterations = 100;
     std::vector<std::string> tempbuffer;
     std::string data;
     bool once = false;
@@ -32,7 +30,12 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
             std::cout << dir_entry.path() << '\n';
             std::filesystem::path file2 = dir_entry.path();
             std::string modifiedpath = "\\";
+            bool isFirstComponent = true;
             for (const auto& component : file2) {
+                if (isFirstComponent) {
+                    isFirstComponent = false;
+                    continue;
+                }
                 modifiedpath += component.string() + "\\";
             }
             modifiedpath.pop_back();
@@ -48,7 +51,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
             size_t compressedsize = 0;
             unsigned char* compressedbuffer = 0;
             size_t pos = 0x400;
-            std::vector<const char*> pathemptybytes(255 - file2.string().length());
+            std::vector<const char*> pathemptybytes(256 - modifiedpath.length());
             const std::vector<const char*> emptybytes(44);
             if (newfile) {
                 //TODO: fix naming
@@ -64,7 +67,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
                 if (filecount != 1) {
                     posfile.seekg(0, std::ios::end); // pos
                     pos = posfile.tellg();
-                    std::cout << pos << '\n';
+                    //std::cout << pos << '\n';
                 }
 
                 newfile2.write(modifiedpath.c_str(), modifiedpath.size()); // path
@@ -75,27 +78,12 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
                 newfile2.write(reinterpret_cast<const char*>(&pos), sizeof(static_cast<unsigned int>(pos))); //file offset
                 newfile2.write(reinterpret_cast<const char*>(emptybytes.data()), emptybytes.size()); //blank 44 bytes
 
-
-                //file header add 1024 then do seekp
-                //EyedentityGames Packing File 0.1 - 100? = 100
-                // unsigned int 0B 00 00 00
-                // file count
-                // file offset start (directory)
-                // 756 dec / 2FA hex empty bytes
-                //write path for 256 bytes // 256 - file.string().c_str()
-                //write raw size 4 bytes //compressedsize
-                //write real size of the file before compression 4 bytes //size_t filesize = stream.tellg();
-                //write compressed size 4 bytes //compressedsize
-                //write file offset 4 bytes // idk
-                //write blank 4 bytes
-                //write blank 40 bytes
-
-                std::cout << "File compressed and written successfully\n";
+                std::cout << "File compressed and written successfully" << '\n';
             }
             free(compressedbuffer);
             startbytes.clear();
             startbytes.shrink_to_fit();
-            std::cout << file2.string().c_str();
+            std::cout << file2.string().c_str() << '\n';
         }
 
     }
@@ -120,7 +108,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
     of_a.write(reinterpret_cast<char*>(&filecount), sizeof(static_cast<unsigned int>(filecount)));
     of_a.seekp(264);
     of_a.write(reinterpret_cast<char*>(&endpos), sizeof(static_cast<unsigned int>(endpos)));
-
+    of_a.close();
 
     std::cout << "Total files: " << filecount << '\n';
     return 0;
@@ -141,12 +129,11 @@ int main(int argc, char** argv)
         exit(0);
     }
 
-    if (std::filesystem::exists("00ResourceTemp1.pak")) {
+    if (std::filesystem::exists("00ResourceTemp1.pak") || std::filesystem::exists("00Resource.pak")) {
         std::filesystem::remove("00ResourceTemp1.pak");
         std::filesystem::remove("00ResourceTemp2.pak");
+        std::filesystem::remove("00Resource.pak");
         std::cout << "file deleted" << '\n';
-    } else {
-        std::cout << "file does not exist" << '\n';
     }
 
     argvpath = argv[1];
@@ -156,8 +143,6 @@ int main(int argc, char** argv)
         std::filesystem::remove("00ResourceTemp2.pak");
         std::filesystem::rename("00ResourceTemp1.pak", "00Resource.pak");
         std::cout << "file deleted" << '\n';
-    } else {
-        std::cout << "file does not exist" << '\n';
     }
     return 0;
 }
