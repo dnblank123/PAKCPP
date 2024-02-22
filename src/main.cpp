@@ -16,12 +16,11 @@
 int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 {
     size_t filecount = 0;
-    std::cout << "List of files: \n";
+    //std::cout << "List of files: \n";
     ZopfliOptions options;
     ZopfliInitOptions(&options);
     options.numiterations = 100;
     std::vector<std::string> tempbuffer;
-    std::string data;
     bool once = false;
     for (auto const& dir_entry : std::filesystem::recursive_directory_iterator{ FileLoc }) {
         if (dir_entry.path().has_extension()) {
@@ -77,7 +76,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
                 newfile2.write(std::bit_cast<const char*>(&pos), sizeof(static_cast<unsigned int>(pos))); //file offset
                 newfile2.write(std::bit_cast<const char*>(emptybytes.data()), emptybytes.size()); //blank 44 bytes
 
-                std::cout << "File compressed and written successfully" << '\n';
+                //std::cout << "File compressed and written successfully" << '\n';
             }
             free(compressedbuffer);
             startbytes.clear();
@@ -109,7 +108,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
     of_a.write(std::bit_cast<char*>(&endpos), sizeof(static_cast<unsigned int>(endpos)));
     of_a.close();
 
-    std::cout << "Total files: " << filecount << '\n';
+    //std::cout << "Total files: " << filecount << '\n';
     return 0;
 }
 
@@ -132,7 +131,7 @@ int main(int argc, char** argv)
         std::filesystem::remove("00ResourceTemp1.pak");
         std::filesystem::remove("00ResourceTemp2.pak");
         std::filesystem::remove("00Resource.pak");
-        std::cout << "file deleted" << '\n';
+        //std::cout << "file deleted" << '\n';
     }
 
     argvpath = argv[1];
@@ -141,7 +140,7 @@ int main(int argc, char** argv)
     if (std::filesystem::exists("00ResourceTemp2.pak")) {
         std::filesystem::remove("00ResourceTemp2.pak");
         std::filesystem::rename("00ResourceTemp1.pak", "00Resource.pak");
-        std::cout << "file deleted" << '\n';
+        //std::cout << "file deleted" << '\n';
     }
     return 0;
 }
