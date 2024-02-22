@@ -135,7 +135,7 @@ equal than *size.
 #define ZOPFLI_APPEND_DATA(/* T */ value, /* T** */ data, /* size_t* */ size) {\
   if (!((*size) & ((*size) - 1))) {\
     /*double alloc size if it's a power of two*/\
-    void** data_void = reinterpret_cast<void**>(data);\
+    void** data_void = std::bit_cast<void**>(data);\
     *data_void = (*size) == 0 ? malloc(sizeof(**data))\
                               : realloc((*data), (*size) * 2 * sizeof(**data));\
   }\

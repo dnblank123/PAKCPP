@@ -13,7 +13,6 @@
 #pragma comment(lib, "zopfli.lib")
 #endif
 
-
 int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 {
     size_t filecount = 0;
@@ -59,7 +58,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
                 std::ofstream newfile2("00ResourceTemp2.pak", std::ios::binary | std::ios::out | std::ios::app);
                 if (!once) {
                     once = true;
-                    newfile.write(reinterpret_cast<const char*>(startbytes.data()), startbytes.size());
+                    newfile.write(std::bit_cast<const char*>(startbytes.data()), startbytes.size());
                 }
                 ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, buffer.data(), filesize, &compressedbuffer, &compressedsize);
                 newfile.write(std::bit_cast<const char*>(compressedbuffer), compressedsize); //compressed file
@@ -72,11 +71,11 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 
                 newfile2.write(modifiedpath.c_str(), modifiedpath.size()); // path
                 newfile2.write(std::bit_cast<const char*>(pathemptybytes.data()), pathemptybytes.size()); // path empty bytes
-                newfile2.write(reinterpret_cast<const char*>(&compressedsize), sizeof(static_cast<unsigned int>(compressedsize))); //raw size
-                newfile2.write(reinterpret_cast<const char*>(&filesize), sizeof(static_cast<unsigned int>(filesize))); //uncompressed filesize
-                newfile2.write(reinterpret_cast<const char*>(&compressedsize), sizeof(static_cast<unsigned int>(compressedsize))); //compressed size
-                newfile2.write(reinterpret_cast<const char*>(&pos), sizeof(static_cast<unsigned int>(pos))); //file offset
-                newfile2.write(reinterpret_cast<const char*>(emptybytes.data()), emptybytes.size()); //blank 44 bytes
+                newfile2.write(std::bit_cast<const char*>(&compressedsize), sizeof(static_cast<unsigned int>(compressedsize))); //raw size
+                newfile2.write(std::bit_cast<const char*>(&filesize), sizeof(static_cast<unsigned int>(filesize))); //uncompressed filesize
+                newfile2.write(std::bit_cast<const char*>(&compressedsize), sizeof(static_cast<unsigned int>(compressedsize))); //compressed size
+                newfile2.write(std::bit_cast<const char*>(&pos), sizeof(static_cast<unsigned int>(pos))); //file offset
+                newfile2.write(std::bit_cast<const char*>(emptybytes.data()), emptybytes.size()); //blank 44 bytes
 
                 std::cout << "File compressed and written successfully" << '\n';
             }
@@ -103,11 +102,11 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
     of_a << "EyedentityGames Packing File 0.1";
     of_a.seekp(256);
     int8_t value = 11;
-    of_a.write(reinterpret_cast<char*>(&value), sizeof(value));
+    of_a.write(std::bit_cast<char*>(&value), sizeof(value));
     of_a.seekp(260);
-    of_a.write(reinterpret_cast<char*>(&filecount), sizeof(static_cast<unsigned int>(filecount)));
+    of_a.write(std::bit_cast<char*>(&filecount), sizeof(static_cast<unsigned int>(filecount)));
     of_a.seekp(264);
-    of_a.write(reinterpret_cast<char*>(&endpos), sizeof(static_cast<unsigned int>(endpos)));
+    of_a.write(std::bit_cast<char*>(&endpos), sizeof(static_cast<unsigned int>(endpos)));
     of_a.close();
 
     std::cout << "Total files: " << filecount << '\n';
