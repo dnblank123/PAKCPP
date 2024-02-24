@@ -20,7 +20,6 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
     ZopfliOptions options;
     ZopfliInitOptions(&options);
     options.numiterations = 100;
-    std::vector<std::string> tempbuffer;
     bool once = false;
     for (auto const& dir_entry : std::filesystem::recursive_directory_iterator{ FileLoc }) {
         if (dir_entry.path().has_extension()) {
@@ -40,7 +39,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
             std::ifstream stream;
             std::ofstream newfile("00ResourceTemp1.pak", std::ios::binary | std::ios::out | std::ios::app);
             std::ifstream posfile("00ResourceTemp1.pak", std::ios::binary);
-            std::vector<const char*> startbytes(1024);
+            const char startbytes[1024]{};
             stream.open(file2, std::ios::binary);
             stream.seekg(0, std::ios::end);
             size_t filesize = stream.tellg();
@@ -50,14 +49,14 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
             unsigned char* compressedbuffer = 0;
             size_t pos = 0x400;
             std::vector<const char*> pathemptybytes(256 - modifiedpath.length());
-            const std::vector<const char*> emptybytes(44);
+            const char emptybytes[44]{};
             if (newfile) {
                 //TODO: fix naming
                 stream.read(std::bit_cast<char*>(buffer.data()), filesize);
                 std::ofstream newfile2("00ResourceTemp2.pak", std::ios::binary | std::ios::out | std::ios::app);
                 if (!once) {
                     once = true;
-                    newfile.write(std::bit_cast<const char*>(startbytes.data()), startbytes.size());
+                    newfile.write(startbytes, sizeof(startbytes));
                 }
                 ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, buffer.data(), filesize, &compressedbuffer, &compressedsize);
                 newfile.write(std::bit_cast<const char*>(compressedbuffer), compressedsize); //compressed file
@@ -74,13 +73,11 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
                 newfile2.write(std::bit_cast<const char*>(&filesize), sizeof(static_cast<unsigned int>(filesize))); //uncompressed filesize
                 newfile2.write(std::bit_cast<const char*>(&compressedsize), sizeof(static_cast<unsigned int>(compressedsize))); //compressed size
                 newfile2.write(std::bit_cast<const char*>(&pos), sizeof(static_cast<unsigned int>(pos))); //file offset
-                newfile2.write(std::bit_cast<const char*>(emptybytes.data()), emptybytes.size()); //blank 44 bytes
+                newfile2.write(emptybytes, sizeof(emptybytes)); //blank 44 bytes
 
                 //std::cout << "File compressed and written successfully" << '\n';
             }
             free(compressedbuffer);
-            startbytes.clear();
-            startbytes.shrink_to_fit();
             std::cout << file2.string().c_str() << '\n';
         }
 
