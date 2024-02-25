@@ -6,7 +6,7 @@
 
 # TODO
 - Rewrite for better code
-- Use ZSTD for more high ratio compression
+- ~Use ZSTD for more high ratio compression~ cant
 - GUI (ImGUI) for practice.
 
 <br/>
