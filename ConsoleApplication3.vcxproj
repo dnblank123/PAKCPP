@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="zstd\zlibWrapper\zstd_zlibwrapper.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
@@ -55,7 +56,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>ClangCL</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <LLVMToolsVersion>17</LLVMToolsVersion>
@@ -79,14 +80,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(MSBuildProjectDirectory)\x64\Release;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(MSBuildProjectDirectory)\zopfli;$(IncludePath)</IncludePath>
+    <LibraryPath>$(MSBuildProjectDirectory)\zlib-ng\lib;$(MSBuildProjectDirectory)\x64\Release;$(MSBuildProjectDirectory)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(MSBuildProjectDirectory)\zopfli;$(MSBuildProjectDirectory)\zstd\zlibWrapper;$(MSBuildProjectDirectory)\zlib-ng\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)</OutDir>
-    <IncludePath>$(MSBuildProjectDirectory)\zopfli;$(IncludePath)</IncludePath>
-    <LibraryPath>$(MSBuildProjectDirectory)\x64\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(MSBuildProjectDirectory)\zopfli;$(MSBuildProjectDirectory)\zstd\zlibWrapper;$(MSBuildProjectDirectory)\zlib-1.3.1;$(IncludePath)</IncludePath>
+    <LibraryPath>$(MSBuildProjectDirectory)\zlib-1.3.1\Release;$(MSBuildProjectDirectory)\x64\Release;$(MSBuildProjectDirectory)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -136,14 +137,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_AMD64_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_AMD64_;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <AdditionalOptions>-flto -march=native -Ofast %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-flto -march=native -Ofast -DZWRAP_USE_ZSTD=1 -lzstd %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

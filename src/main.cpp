@@ -1,3 +1,4 @@
+#include <Windows.h>
 #include <algorithm>
 #include <filesystem>
 #include <fstream>
@@ -5,21 +6,23 @@
 #include <iostream>
 #include <processthreadsapi.h>
 #include <vector>
-#include <Windows.h>
-
 #include "src/zopfli/zopfli.h"
-
+#define WIN32_LEAN_AND_MEAN 
+#define ZWRAP_USE_ZSTD 1
+#include <zstd_zlibwrapper.h>
+#include <zstd.h>
 #ifdef _MSC_VER
-#pragma comment(lib, "zopfli.lib")
+//#pragma comment(lib, "zopfli.lib")
 #endif
+#pragma comment(lib, "zlibstatic.lib")
 
 int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 {
     size_t filecount = 0;
     //std::cout << "List of files: \n";
-    ZopfliOptions options;
-    ZopfliInitOptions(&options);
-    options.numiterations = 100;
+    //ZopfliOptions options;
+    //ZopfliInitOptions(&options);
+    //options.numiterations = 100;
     bool once = false;
     for (auto const& dir_entry : std::filesystem::recursive_directory_iterator{ FileLoc }) {
         if (dir_entry.path().has_extension()) {
@@ -45,8 +48,10 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
             size_t filesize = stream.tellg();
             stream.seekg(0, std::ios::beg);
             std::vector<unsigned char> buffer(filesize);
-            size_t compressedsize = 0;
-            unsigned char* compressedbuffer = 0;
+            std::vector<unsigned char> compressedbuffer(compressBound(filesize));
+            uLongf compressedsize = compressedbuffer.size();
+
+            //unsigned char* compressedbuffer = 0;
             size_t pos = 0x400;
             std::vector<const char*> pathemptybytes(256 - modifiedpath.length());
             const char emptybytes[44]{};
@@ -58,8 +63,12 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
                     once = true;
                     newfile.write(startbytes, sizeof(startbytes));
                 }
-                ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, buffer.data(), filesize, &compressedbuffer, &compressedsize);
-                newfile.write(std::bit_cast<const char*>(compressedbuffer), compressedsize); //compressed file
+
+                //ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, buffer.data(), filesize, &compressedbuffer, &compressedsize);
+                compress2(compressedbuffer.data(), &compressedsize, buffer.data(), filesize, 22);
+                
+
+                newfile.write((const char*)(compressedbuffer.data()), compressedsize); //compressed file
 
                 if (filecount != 1) {
                     posfile.seekg(0, std::ios::end); // pos
@@ -77,7 +86,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 
                 //std::cout << "File compressed and written successfully" << '\n';
             }
-            free(compressedbuffer);
+            //free(compressedbuffer);
             std::cout << file2.string().c_str() << '\n';
         }
 
@@ -111,6 +120,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 
 int main(int argc, char** argv)
 {
+    ZWRAP_useZSTDcompression(1);
     HANDLE hProcess = GetCurrentProcess();
     HANDLE hThread = GetCurrentThread();
     SetPriorityClass(hProcess, REALTIME_PRIORITY_CLASS);
@@ -118,11 +128,11 @@ int main(int argc, char** argv)
 
     std::filesystem::path argvpath;
 
-    if (argc == 1 || argc > 2)
-    {
-        std::cout << "Usage: pakcpp.exe folder" << '\n';
-        exit(0);
-    }
+    //if (argc == 1 || argc > 2)
+    //{
+    //    std::cout << "Usage: pakcpp.exe folder" << '\n';
+    //    exit(0);
+    //}
 
     if (std::filesystem::exists("00ResourceTemp1.pak") || std::filesystem::exists("00Resource.pak")) {
         std::filesystem::remove("00ResourceTemp1.pak");

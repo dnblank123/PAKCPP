@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C5DE70B0-89AB-38C0-B9BE-EB23FF25B3BF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>minigzip</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">minigzip.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">minigzip</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">minigzip.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">minigzip</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">minigzip.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">minigzip</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">minigzip.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">minigzip</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>Debug\zlibd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/Debug/minigzip.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/Debug/minigzip.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>Release\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/Release/minigzip.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/Release/minigzip.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>MinSizeRel\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/MinSizeRel/minigzip.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/MinSizeRel/minigzip.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>RelWithDebInfo\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/RelWithDebInfo/minigzip.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/RelWithDebInfo/minigzip.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+G:\gcc\bin\cmake.exe -SC:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1 -BC:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1 --check-stamp-file C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeCCompiler.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeRCCompiler.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeSystem.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\zconf.h.cmakein;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\zlib.pc.cmakein;G:\gcc\share\cmake-3.27\Modules\CMakeCCompiler.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeCCompilerABI.c;G:\gcc\share\cmake-3.27\Modules\CMakeCInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeCompilerIdDetection.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompileFeatures.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompilerABI.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompilerId.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineRCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineSystem.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeFindBinUtils.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseImplicitIncludeInfo.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseImplicitLinkInfo.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseLibraryArchitecture.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeRCCompiler.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeRCInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeSystem.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestCompilerCommon.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestRCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CheckCSourceCompiles.cmake;G:\gcc\share\cmake-3.27\Modules\CheckFunctionExists.cmake;G:\gcc\share\cmake-3.27\Modules\CheckIncludeFile.cmake;G:\gcc\share\cmake-3.27\Modules\CheckIncludeFileCXX.cmake;G:\gcc\share\cmake-3.27\Modules\CheckTypeSize.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ADSP-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ARMCC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ARMClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\AppleClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Borland-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Cray-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\GHS-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\GNU-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\HP-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IAR-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Intel-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\LCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\NVHPC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\PGI-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\PathScale-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SCO-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\TI-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Tasking-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Watcom-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\XL-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\zOS-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CompilerId\VS-10.vcxproj.in;G:\gcc\share\cmake-3.27\Modules\Internal\CheckSourceCompiles.cmake;G:\gcc\share\cmake-3.27\Modules\Internal\FeatureTesting.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+G:\gcc\bin\cmake.exe -SC:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1 -BC:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1 --check-stamp-file C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeCCompiler.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeRCCompiler.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeSystem.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\zconf.h.cmakein;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\zlib.pc.cmakein;G:\gcc\share\cmake-3.27\Modules\CMakeCCompiler.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeCCompilerABI.c;G:\gcc\share\cmake-3.27\Modules\CMakeCInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeCompilerIdDetection.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompileFeatures.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompilerABI.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompilerId.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineRCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineSystem.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeFindBinUtils.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseImplicitIncludeInfo.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseImplicitLinkInfo.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseLibraryArchitecture.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeRCCompiler.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeRCInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeSystem.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestCompilerCommon.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestRCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CheckCSourceCompiles.cmake;G:\gcc\share\cmake-3.27\Modules\CheckFunctionExists.cmake;G:\gcc\share\cmake-3.27\Modules\CheckIncludeFile.cmake;G:\gcc\share\cmake-3.27\Modules\CheckIncludeFileCXX.cmake;G:\gcc\share\cmake-3.27\Modules\CheckTypeSize.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ADSP-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ARMCC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ARMClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\AppleClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Borland-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Cray-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\GHS-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\GNU-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\HP-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IAR-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Intel-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\LCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\NVHPC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\PGI-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\PathScale-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SCO-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\TI-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Tasking-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Watcom-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\XL-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\zOS-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CompilerId\VS-10.vcxproj.in;G:\gcc\share\cmake-3.27\Modules\Internal\CheckSourceCompiles.cmake;G:\gcc\share\cmake-3.27\Modules\Internal\FeatureTesting.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+G:\gcc\bin\cmake.exe -SC:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1 -BC:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1 --check-stamp-file C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeCCompiler.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeRCCompiler.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeSystem.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\zconf.h.cmakein;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\zlib.pc.cmakein;G:\gcc\share\cmake-3.27\Modules\CMakeCCompiler.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeCCompilerABI.c;G:\gcc\share\cmake-3.27\Modules\CMakeCInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeCompilerIdDetection.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompileFeatures.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompilerABI.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompilerId.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineRCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineSystem.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeFindBinUtils.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseImplicitIncludeInfo.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseImplicitLinkInfo.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseLibraryArchitecture.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeRCCompiler.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeRCInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeSystem.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestCompilerCommon.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestRCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CheckCSourceCompiles.cmake;G:\gcc\share\cmake-3.27\Modules\CheckFunctionExists.cmake;G:\gcc\share\cmake-3.27\Modules\CheckIncludeFile.cmake;G:\gcc\share\cmake-3.27\Modules\CheckIncludeFileCXX.cmake;G:\gcc\share\cmake-3.27\Modules\CheckTypeSize.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ADSP-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ARMCC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ARMClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\AppleClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Borland-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Cray-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\GHS-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\GNU-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\HP-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IAR-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Intel-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\LCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\NVHPC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\PGI-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\PathScale-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SCO-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\TI-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Tasking-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Watcom-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\XL-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\zOS-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CompilerId\VS-10.vcxproj.in;G:\gcc\share\cmake-3.27\Modules\Internal\CheckSourceCompiles.cmake;G:\gcc\share\cmake-3.27\Modules\Internal\FeatureTesting.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+G:\gcc\bin\cmake.exe -SC:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1 -BC:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1 --check-stamp-file C:/Users/Admin/Desktop/PAKCPP/zlib-1.3.1/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeCCompiler.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeRCCompiler.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\3.27.8\CMakeSystem.cmake;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\zconf.h.cmakein;C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\zlib.pc.cmakein;G:\gcc\share\cmake-3.27\Modules\CMakeCCompiler.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeCCompilerABI.c;G:\gcc\share\cmake-3.27\Modules\CMakeCInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeCompilerIdDetection.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompileFeatures.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompilerABI.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineCompilerId.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineRCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeDetermineSystem.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeFindBinUtils.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseImplicitIncludeInfo.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseImplicitLinkInfo.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeParseLibraryArchitecture.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeRCCompiler.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeRCInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeSystem.cmake.in;G:\gcc\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestCompilerCommon.cmake;G:\gcc\share\cmake-3.27\Modules\CMakeTestRCCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CheckCSourceCompiles.cmake;G:\gcc\share\cmake-3.27\Modules\CheckFunctionExists.cmake;G:\gcc\share\cmake-3.27\Modules\CheckIncludeFile.cmake;G:\gcc\share\cmake-3.27\Modules\CheckIncludeFileCXX.cmake;G:\gcc\share\cmake-3.27\Modules\CheckTypeSize.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ADSP-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ARMCC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\ARMClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\AppleClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Borland-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Cray-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\GHS-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\GNU-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\HP-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IAR-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Intel-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\LCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\MSVC.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\NVHPC-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\PGI-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\PathScale-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SCO-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\TI-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Tasking-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\Watcom-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\XL-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\Compiler\zOS-C-DetermineCompiler.cmake;G:\gcc\share\cmake-3.27\Modules\CompilerId\VS-10.vcxproj.in;G:\gcc\share\cmake-3.27\Modules\Internal\CheckSourceCompiles.cmake;G:\gcc\share\cmake-3.27\Modules\Internal\FeatureTesting.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\Windows.cmake;G:\gcc\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\test\minigzip.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\ZERO_CHECK.vcxproj">
+      <Project>{EBA2E233-06AB-38EF-B035-99E0A6BD7556}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Admin\Desktop\PAKCPP\zlib-1.3.1\zlib.vcxproj">
+      <Project>{73CFCD6D-6D53-3EE6-9CF5-0B38C11280FA}</Project>
+      <Name>zlib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
