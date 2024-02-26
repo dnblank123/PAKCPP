@@ -6,20 +6,27 @@
 #include <processthreadsapi.h>
 #include <vector>
 #include <Windows.h>
+#include <thread>
 
-#include "src/zopfli/zopfli.h"
+#include "src/zopfli/zlib_container.h"
 
-#ifdef _MSC_VER
-#pragma comment(lib, "zopfli.lib")
-#endif
+//#ifdef _MSC_VER
+//#pragma comment(lib, "zopfli.lib")
+//#endif
 
-int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
+int GetFilesFolderAndCompress(std::filesystem::path& FileLoc, unsigned int threads)
 {
     size_t filecount = 0;
     //std::cout << "List of files: \n";
     ZopfliOptions options;
     ZopfliInitOptions(&options);
     options.numiterations = 100;
+    options.numthreads = threads;
+    options.mode = 0x0004;
+    ZopfliPredefinedSplits splits;
+    splits.splitpoints = 0;
+    splits.npoints = 0;
+
     bool once = false;
     for (auto const& dir_entry : std::filesystem::recursive_directory_iterator{ FileLoc }) {
         if (dir_entry.path().has_extension()) {
@@ -58,7 +65,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
                     once = true;
                     newfile.write(startbytes, sizeof(startbytes));
                 }
-                ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, buffer.data(), filesize, &compressedbuffer, &compressedsize);
+                ZopfliZlibCompress(&options, buffer.data(), filesize, &compressedbuffer, &compressedsize, &splits);
                 newfile.write(std::bit_cast<const char*>(compressedbuffer), compressedsize); //compressed file
 
                 if (filecount != 1) {
@@ -111,9 +118,8 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 
 int main(int argc, char** argv)
 {
-    HANDLE hProcess = GetCurrentProcess();
+    unsigned int totalthreads = std::thread::hardware_concurrency();
     HANDLE hThread = GetCurrentThread();
-    SetPriorityClass(hProcess, REALTIME_PRIORITY_CLASS);
     SetThreadPriority(hThread, THREAD_PRIORITY_TIME_CRITICAL);
 
     std::filesystem::path argvpath;
@@ -132,7 +138,7 @@ int main(int argc, char** argv)
     }
 
     argvpath = argv[1];
-    GetFilesFolderAndCompress(argvpath);
+    GetFilesFolderAndCompress(argvpath, totalthreads);
 
     if (std::filesystem::exists("00ResourceTemp2.pak")) {
         std::filesystem::remove("00ResourceTemp2.pak");
