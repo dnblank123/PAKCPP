@@ -22,6 +22,7 @@ int GetFilesFolderAndCompress(std::filesystem::path& FileLoc, unsigned int threa
     ZopfliInitOptions(&options);
     options.numiterations = 100;
     options.numthreads = threads;
+    options.blocksplittingmax = 0;
     options.mode = 0x0004;
     ZopfliPredefinedSplits splits;
     splits.splitpoints = 0;
