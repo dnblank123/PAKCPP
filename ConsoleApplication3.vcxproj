@@ -79,7 +79,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(MSBuildProjectDirectory)\x64\Release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(MSBuildProjectDirectory)\x64\Debug;$(LibraryPath)</LibraryPath>
     <IncludePath>$(MSBuildProjectDirectory)\zopfli;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)</OutDir>
   </PropertyGroup>
