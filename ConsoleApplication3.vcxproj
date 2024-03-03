@@ -49,8 +49,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>ClangCL</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <LLVMToolsVersion>17</LLVMToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -82,11 +83,15 @@
     <LibraryPath>$(MSBuildProjectDirectory)\x64\Debug;$(LibraryPath)</LibraryPath>
     <IncludePath>$(MSBuildProjectDirectory)\zopfli;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)</OutDir>
+    <ClangTidyChecks>clang-analyzer-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,-cppcoreguidelines-avoid-magic-numbers,-cppcoreguidelines-avoid-non-const-global-variables,-clang-diagnostic-c++98-*,-modernize-use-trailing-return-type,-cppcoreguidelines-pro-type-vararg,-clang-diagnostic-format-security,-cppcoreguidelines-pro-type-union-access,-clang-diagnostic-unknown-pragmas,-cppcoreguidelines-pro-bounds-pointer-arithmetic</ClangTidyChecks>
+    <EnableMicrosoftCodeAnalysis>true</EnableMicrosoftCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)</OutDir>
     <IncludePath>$(MSBuildProjectDirectory)\zopfli;$(IncludePath)</IncludePath>
     <LibraryPath>$(MSBuildProjectDirectory)\x64\Release;$(LibraryPath)</LibraryPath>
+    <ClangTidyChecks>clang-analyzer-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,-cppcoreguidelines-avoid-magic-numbers,-cppcoreguidelines-avoid-non-const-global-variables,-clang-diagnostic-c++98-*,-modernize-use-trailing-return-type,-cppcoreguidelines-pro-type-vararg,-clang-diagnostic-format-security,-cppcoreguidelines-pro-type-union-access,-clang-diagnostic-unknown-pragmas,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-Wno-unsafe-buffer-usage </ClangTidyChecks>
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -132,7 +137,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
