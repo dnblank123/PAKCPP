@@ -1,24 +1,32 @@
-﻿#include <algorithm>
-#include <any>
+﻿
+#include <algorithm>
+#include <array>
+#include <bit>
 #include <chrono>
+#include <cstddef>
+#include <cstdint>
+#include <cstdlib>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <processthreadsapi.h>
+#include <iterator>
+#include <numeric>
+#include <ratio>
+#include <string>
 #include <vector>
-#include <Windows.h>
-#include <array>
+
 #include "src/zopfli/zopfli.h"
-#include <string_view>
+
 #ifdef _MSC_VER
 #pragma comment(lib, "zopfli.lib")
 #endif
+
 void GetFilesFolderAndCompress(std::filesystem::path& FileLoc);
 
 struct Header {
     std::string filesignature = "EyedentityGames Packing File 0.1";
     size_t filecount = 0;
-    static constexpr uint8_t value = 11;
+    static constexpr uint8_t unknown = 11;
     std::array<const char, 1024> headerbytes = {};
     size_t fileindex = 0;
 };
@@ -31,24 +39,12 @@ struct ContentFiles {
     size_t filepos = 0;
     size_t filesize = 0;
     std::array<uint8_t, 44> emptybytes = {};
-
-    ~ContentFiles(){
-        incompress.clear();
-        compressedsize = 0;
-        compressedbuffer = nullptr;
-        filesize = 0;
-        filepos = 0;
-    }
 };
 
 struct TempAlloc {
-    std::vector<std::byte> tempbuffer = {};
-    std::uint8_t* compressedsizeptr = nullptr;
-    std::uint8_t* filesizeptr = nullptr;
-    std::uint8_t* posptr = nullptr;
+    std::vector<char> tempbuffer = {};
 };
 
-//possible speed up : count total files then reserve once.
 void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 {
     Header header;
@@ -58,11 +54,12 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
     ZopfliOptions options;
     ZopfliInitOptions(&options);
     options.numiterations = 100;
-
+    const std::string rootpath = FileLoc.string();
     std::ifstream stream;
     std::ofstream newfile("00Resource.pak", std::ios::binary | std::ios::out | std::ios::app);
 
     newfile.write(header.headerbytes.data(), header.headerbytes.size());
+
     for (auto const& dir_entry : std::filesystem::recursive_directory_iterator{ FileLoc }) {
         if (dir_entry.path().has_extension()) {
             header.filecount++;
@@ -71,86 +68,88 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 
     for (auto const& dir_entry : std::filesystem::recursive_directory_iterator{ FileLoc }) {
         if (dir_entry.path().has_extension()) {
-            std::cout << dir_entry.path() << '\n';
-            std::filesystem::path file2 = dir_entry.path();
-            std::string modifiedpath = "\\";
-            bool isFirstComponent = true;
-            for (const auto& component : file2) {
-                if (isFirstComponent) {
-                    isFirstComponent = false;
-                    continue;
-                }
-                modifiedpath += component.string() + "\\";
+
+            const std::filesystem::path& file2 = dir_entry.path();
+            std::string path = file2.string();
+            if (path.find(rootpath) == 0) {
+                path.erase(0, rootpath.length());
             }
-            modifiedpath.pop_back();
+
+            std::cout << path << '\n';
 
             stream.open(file2, std::ios::binary);
             stream.seekg(0, std::ios::end);
             contentfiles.filesize = static_cast<size_t>(stream.tellg());
             stream.seekg(0, std::ios::beg);
 
+            contentfiles.incompress.reserve(contentfiles.filesize);
             contentfiles.incompress.resize(contentfiles.filesize);
 
-            contentfiles.pathemptybytes.resize(256 - modifiedpath.length());
+            contentfiles.pathemptybytes.resize(256 - path.length());
             contentfiles.pathemptybytes.reserve(256 * header.filecount);
             
             tempalloc.tempbuffer.reserve(316 * header.filecount);
 
-            if (newfile) {
-                //TODO: fix naming
-                stream.read(std::bit_cast<char*>(contentfiles.incompress.data()), static_cast<uint32_t>(contentfiles.filesize));
+            //TODO: fix naming
+            stream.read(std::bit_cast<char*>(contentfiles.incompress.data()), static_cast<uint32_t>(contentfiles.filesize));
 
-                contentfiles.filepos = static_cast<size_t>(newfile.tellp());
-                tempalloc.posptr = std::bit_cast<std::uint8_t*>(&contentfiles.filepos);
+            contentfiles.filepos = static_cast<size_t>(newfile.tellp());
                 
-                ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, contentfiles.incompress.data(), contentfiles.filesize, &contentfiles.compressedbuffer, &contentfiles.compressedsize);
-                newfile.write(std::bit_cast<const char*>(contentfiles.compressedbuffer), static_cast<uint32_t>(contentfiles.compressedsize));
+            ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, contentfiles.incompress.data(), contentfiles.filesize, &contentfiles.compressedbuffer, &contentfiles.compressedsize);
+            newfile.write(std::bit_cast<const char*>(contentfiles.compressedbuffer), static_cast<uint32_t>(contentfiles.compressedsize));
 
-                tempalloc.compressedsizeptr = std::bit_cast<std::uint8_t*>(&contentfiles.compressedsize);
-                tempalloc.filesizeptr = std::bit_cast<std::uint8_t*>(&contentfiles.filesize);
+            std::cout << "size: " << tempalloc.tempbuffer.size() << " capacity: " << tempalloc.tempbuffer.capacity() << '\n';
+            auto timer1 = std::chrono::high_resolution_clock::now();
 
-                std::cout << "size: " << tempalloc.tempbuffer.size() << " capacity: " << tempalloc.tempbuffer.capacity() << '\n';
-                auto t1 = std::chrono::high_resolution_clock::now();
-                //TODO: memcpy if I understand it...
-                for (char &path : modifiedpath) {
-                    tempalloc.tempbuffer.emplace_back(static_cast<std::byte>(path));
-                }
-                for (char &empbytes : contentfiles.pathemptybytes) {
-                    tempalloc.tempbuffer.emplace_back(static_cast<std::byte>(empbytes));
-                }
-                for (uint32_t i = 0; i < sizeof(uint32_t); i++) {
-                    tempalloc.tempbuffer.emplace_back(static_cast<std::byte>(tempalloc.compressedsizeptr[i]));
-                }
-                for (uint32_t i = 0; i < sizeof(uint32_t); i++) {
-                    tempalloc.tempbuffer.emplace_back(static_cast<std::byte>(tempalloc.filesizeptr[i]));
-                }
-                for (uint32_t i = 0; i < sizeof(uint32_t); i++) {
-                    tempalloc.tempbuffer.emplace_back(static_cast<std::byte>(tempalloc.compressedsizeptr[i]));
-                }                
-                for (uint32_t i = 0; i < sizeof(uint32_t); i++) {
-                    tempalloc.tempbuffer.emplace_back(static_cast<std::byte>(tempalloc.posptr[i]));
-                }
-                for (const char& c : contentfiles.emptybytes) {
-                    tempalloc.tempbuffer.emplace_back(static_cast<std::byte>(c));
-                }
-                auto t2 = std::chrono::high_resolution_clock::now();
+            std::copy(path.begin(), 
+                        path.end(), 
+                            std::back_inserter(tempalloc.tempbuffer));
+                
+            std::copy(contentfiles.pathemptybytes.begin(), 
+                        contentfiles.pathemptybytes.end(), 
+                            std::back_inserter(tempalloc.tempbuffer));
+               
+            std::copy(std::bit_cast<const char*>(&contentfiles.compressedsize),
+                        std::bit_cast<const char*>(&contentfiles.compressedsize) + sizeof(uint32_t),
+                            std::back_inserter(tempalloc.tempbuffer));
 
-                std::chrono::duration<double, std::milli> ms_double = t2 - t1;
+            std::copy(std::bit_cast<const char*>(&contentfiles.filesize),
+                        std::bit_cast<const char*>(&contentfiles.filesize) + sizeof(uint32_t),
+                            std::back_inserter(tempalloc.tempbuffer));
 
-                std::cout << "Time :  " << ms_double.count() << "ms" << '\n';
-            }
+            std::copy(std::bit_cast<const char*>(&contentfiles.compressedsize),
+                        std::bit_cast<const char*>(&contentfiles.compressedsize) + sizeof(uint32_t),
+                            std::back_inserter(tempalloc.tempbuffer));
 
-            std::cout << file2.string().c_str() << '\n';
+            std::copy(std::bit_cast<const char*>(&contentfiles.filepos),
+                        std::bit_cast<const char*>(&contentfiles.filepos) + sizeof(uint32_t),
+                            std::back_inserter(tempalloc.tempbuffer));
+
+            std::copy(contentfiles.emptybytes.begin(),
+                        contentfiles.emptybytes.end(),
+                            std::back_inserter(tempalloc.tempbuffer));
+
+
+            auto timer2 = std::chrono::high_resolution_clock::now();
+
+            const std::chrono::duration<double, std::milli> ms_double = timer2 - timer1;
+
+            std::cout << "Time :  " << ms_double.count() << "ms" << '\n';
+            
         }
-        contentfiles.~ContentFiles();
+        contentfiles.incompress.clear();
+        contentfiles.compressedsize = 0;
+        contentfiles.compressedbuffer = nullptr;
+        contentfiles.filesize = 0;
+        contentfiles.filepos = 0;
         stream.close();
     }
     newfile.close();
-    size_t endpos = 0;
+
     std::ofstream of_a("00Resource.pak", std::ios_base::binary | std::ios_base::app);
     of_a.seekp(0, std::ios_base::end);
-    endpos = of_a.tellp();
-    of_a.write(std::bit_cast<const char*>(tempalloc.tempbuffer.data()), tempalloc.tempbuffer.size());
+    header.fileindex = static_cast<uint32_t>(of_a.tellp());
+    of_a.write(std::bit_cast<const char*>(tempalloc.tempbuffer.data()), std::bit_cast<std::streamsize>(tempalloc.tempbuffer.size()));
 
     of_a.close();
 
@@ -158,30 +157,28 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
     newfile.seekp(std::ios_base::beg);
     newfile << "EyedentityGames Packing File 0.1";
     newfile.seekp(256);
-    static constexpr uint8_t value = 11;
-    newfile.write(std::bit_cast<char*>(&value), sizeof(value));
+    newfile.write(std::bit_cast<char*>(&header.unknown), sizeof(header.unknown));
     newfile.seekp(260);
-    newfile.write(std::bit_cast<char*>(&header.filecount), sizeof(static_cast<unsigned int>(header.filecount)));
+    newfile.write(std::bit_cast<char*>(&header.filecount), sizeof(static_cast<uint32_t>(header.filecount)));
     newfile.seekp(264);
-    newfile.write(std::bit_cast<char*>(&endpos), sizeof(static_cast<unsigned int>(endpos)));
+    newfile.write(std::bit_cast<char*>(&header.fileindex), sizeof(static_cast<uint32_t>(header.fileindex)));
     newfile.close();
+
+    std::cout << "size: " << tempalloc.tempbuffer.size() << " capacity: " << tempalloc.tempbuffer.capacity() << '\n';
 }
 
 int main(int argc, char** argv)
 {
-    HANDLE hThread = GetCurrentThread();
-    SetThreadPriority(hThread, THREAD_PRIORITY_TIME_CRITICAL);
     std::filesystem::path argvpath;
 
     if (argc == 1 || argc > 2)
     {
         std::cout << "Usage: pakcpp.exe folder" << '\n';
-        exit(0);
+        std::quick_exit(0);
     }
 
     if (std::filesystem::exists("00Resource.pak")) {
         std::filesystem::remove("00Resource.pak");
-        //std::cout << "file deleted" << '\n';
     }
 
     argvpath = argv[1];

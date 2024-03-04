@@ -90,7 +90,7 @@
     <OutDir>$(SolutionDir)</OutDir>
     <IncludePath>$(MSBuildProjectDirectory)\zopfli;$(IncludePath)</IncludePath>
     <LibraryPath>$(MSBuildProjectDirectory)\x64\Release;$(LibraryPath)</LibraryPath>
-    <ClangTidyChecks>clang-analyzer-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,-cppcoreguidelines-avoid-magic-numbers,-cppcoreguidelines-avoid-non-const-global-variables,-clang-diagnostic-c++98-*,-modernize-use-trailing-return-type,-cppcoreguidelines-pro-type-vararg,-clang-diagnostic-format-security,-cppcoreguidelines-pro-type-union-access,-clang-diagnostic-unknown-pragmas,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-Wno-unsafe-buffer-usage </ClangTidyChecks>
+    <ClangTidyChecks>*,-abseil-*,-altera-*,-android-*,-fuchsia-*,-google-*,-llvm*,-modernize-use-trailing-return-type,-zircon-*,-readability-else-after-return,-readability-static-accessed-through-instance,-readability-avoid-const-params-in-decls,-cppcoreguidelines-non-private-member-variables-in-classes,-misc-non-private-member-variables-in-classes,-clang-diagnostic-c++98-compat,-clang-diagnostic-unknown-pragmas</ClangTidyChecks>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
