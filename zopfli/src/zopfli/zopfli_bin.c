@@ -29,6 +29,7 @@ decompressor.
 #include <stdlib.h>
 #include <string.h>
 #include <Windows.h>
+#include <io.h>
 
 #include "deflate.h"
 #include "gzip_container.h"

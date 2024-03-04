@@ -1,5 +1,4 @@
-﻿
-#include <algorithm>
+﻿#include <algorithm>
 #include <array>
 #include <bit>
 #include <chrono>
@@ -10,7 +9,6 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
-#include <numeric>
 #include <ratio>
 #include <string>
 #include <vector>
@@ -54,11 +52,11 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
     ZopfliOptions options;
     ZopfliInitOptions(&options);
     options.numiterations = 100;
-    const std::string rootpath = FileLoc.string();
+    const std::string& rootpath = FileLoc.string();
     std::ifstream stream;
-    std::ofstream newfile("00Resource.pak", std::ios::binary | std::ios::out | std::ios::app);
+    std::ofstream file("00Resource.pak", std::ios::binary | std::ios::out | std::ios::app);
 
-    newfile.write(header.headerbytes.data(), header.headerbytes.size());
+    file.write(header.headerbytes.data(), header.headerbytes.size());
 
     for (auto const& dir_entry : std::filesystem::recursive_directory_iterator{ FileLoc }) {
         if (dir_entry.path().has_extension()) {
@@ -66,40 +64,39 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
         }
     }
 
+    tempalloc.tempbuffer.reserve(316 * header.filecount);
+    contentfiles.pathemptybytes.reserve(256 * header.filecount);
+
     for (auto const& dir_entry : std::filesystem::recursive_directory_iterator{ FileLoc }) {
         if (dir_entry.path().has_extension()) {
 
-            const std::filesystem::path& file2 = dir_entry.path();
-            std::string path = file2.string();
+            const std::filesystem::path& filepath = dir_entry.path();
+            std::string path = filepath.string();
             if (path.find(rootpath) == 0) {
                 path.erase(0, rootpath.length());
             }
+            //std::cout << path << '\n';
 
-            std::cout << path << '\n';
 
-            stream.open(file2, std::ios::binary);
+            stream.open(filepath, std::ios::binary);
             stream.seekg(0, std::ios::end);
             contentfiles.filesize = static_cast<size_t>(stream.tellg());
             stream.seekg(0, std::ios::beg);
 
             contentfiles.incompress.reserve(contentfiles.filesize);
-            contentfiles.incompress.resize(contentfiles.filesize);
 
             contentfiles.pathemptybytes.resize(256 - path.length());
-            contentfiles.pathemptybytes.reserve(256 * header.filecount);
-            
-            tempalloc.tempbuffer.reserve(316 * header.filecount);
 
             //TODO: fix naming
             stream.read(std::bit_cast<char*>(contentfiles.incompress.data()), static_cast<uint32_t>(contentfiles.filesize));
 
-            contentfiles.filepos = static_cast<size_t>(newfile.tellp());
+            contentfiles.filepos = static_cast<size_t>(file.tellp());
                 
             ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, contentfiles.incompress.data(), contentfiles.filesize, &contentfiles.compressedbuffer, &contentfiles.compressedsize);
-            newfile.write(std::bit_cast<const char*>(contentfiles.compressedbuffer), static_cast<uint32_t>(contentfiles.compressedsize));
+            file.write(std::bit_cast<const char*>(contentfiles.compressedbuffer), static_cast<uint32_t>(contentfiles.compressedsize));
 
-            std::cout << "size: " << tempalloc.tempbuffer.size() << " capacity: " << tempalloc.tempbuffer.capacity() << '\n';
-            auto timer1 = std::chrono::high_resolution_clock::now();
+            //std::cout << "size: " << tempalloc.tempbuffer.size() << " capacity: " << tempalloc.tempbuffer.capacity() << '\n';
+            //auto timer1 = std::chrono::high_resolution_clock::now();
 
             std::copy(path.begin(), 
                         path.end(), 
@@ -130,11 +127,11 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
                             std::back_inserter(tempalloc.tempbuffer));
 
 
-            auto timer2 = std::chrono::high_resolution_clock::now();
+            //auto timer2 = std::chrono::high_resolution_clock::now();
 
-            const std::chrono::duration<double, std::milli> ms_double = timer2 - timer1;
+            //const std::chrono::duration<double, std::milli> ms_double = timer2 - timer1;
 
-            std::cout << "Time :  " << ms_double.count() << "ms" << '\n';
+            //std::cout << "Time :  " << ms_double.count() << "ms" << '\n';
             
         }
         contentfiles.incompress.clear();
@@ -144,27 +141,22 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
         contentfiles.filepos = 0;
         stream.close();
     }
-    newfile.close();
+    header.fileindex = static_cast<uint32_t>(file.tellp());
+    file.write(std::bit_cast<const char*>(tempalloc.tempbuffer.data()), std::bit_cast<std::streamsize>(tempalloc.tempbuffer.size()));
 
-    std::ofstream of_a("00Resource.pak", std::ios_base::binary | std::ios_base::app);
-    of_a.seekp(0, std::ios_base::end);
-    header.fileindex = static_cast<uint32_t>(of_a.tellp());
-    of_a.write(std::bit_cast<const char*>(tempalloc.tempbuffer.data()), std::bit_cast<std::streamsize>(tempalloc.tempbuffer.size()));
+    file.close();
 
-    of_a.close();
+    file.open("00Resource.pak", std::ios_base::binary | std::ios_base::in);
+    file.write(header.filesignature.c_str(), header.filesignature.size());
+    file.seekp(256);
+    file.write(std::bit_cast<char*>(&header.unknown), sizeof(header.unknown));
+    file.seekp(260);
+    file.write(std::bit_cast<char*>(&header.filecount), sizeof(static_cast<uint32_t>(header.filecount)));
+    file.seekp(264);
+    file.write(std::bit_cast<char*>(&header.fileindex), sizeof(static_cast<uint32_t>(header.fileindex)));
+    file.close();
 
-    newfile.open("00Resource.pak", std::ios_base::binary | std::ios_base::in);
-    newfile.seekp(std::ios_base::beg);
-    newfile << "EyedentityGames Packing File 0.1";
-    newfile.seekp(256);
-    newfile.write(std::bit_cast<char*>(&header.unknown), sizeof(header.unknown));
-    newfile.seekp(260);
-    newfile.write(std::bit_cast<char*>(&header.filecount), sizeof(static_cast<uint32_t>(header.filecount)));
-    newfile.seekp(264);
-    newfile.write(std::bit_cast<char*>(&header.fileindex), sizeof(static_cast<uint32_t>(header.fileindex)));
-    newfile.close();
-
-    std::cout << "size: " << tempalloc.tempbuffer.size() << " capacity: " << tempalloc.tempbuffer.capacity() << '\n';
+    //std::cout << "size: " << tempalloc.tempbuffer.size() << " capacity: " << tempalloc.tempbuffer.capacity() << '\n';
 }
 
 int main(int argc, char** argv)
