@@ -12,13 +12,13 @@
 #include <vector>
 #include <thread>
 
-#include <src/zopfli/zlib_container.h>
+#include "src\zopfli\zlib_container.h"
 
 //#ifdef _MSC_VER
 //#pragma comment(lib, "zopfli.lib")
 //#endif
 
-void GetFilesFolderAndCompress(std::filesystem::path& FileLoc);
+void GetFilesFolderAndCompress(std::filesystem::path& FileLoc, unsigned int threads);
 
 struct Header {
     std::string filesignature = "EyedentityGames Packing File 0.1";
@@ -179,7 +179,7 @@ int main(int argc, char** argv)
     }
 
     argvpath = argv[1];
-    GetFilesFolderAndCompress(argvpath);
+    GetFilesFolderAndCompress(argvpath, totalthreads);
 
 
     return 0;

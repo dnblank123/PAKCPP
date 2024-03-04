@@ -1,0 +1,1 @@
+g++ main.cpp -Ofast -mavx -I..\zopfli\ -std=c++20 -lzopfli
