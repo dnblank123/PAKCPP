@@ -1,7 +1,6 @@
 ﻿#include <algorithm>
 #include <array>
 #include <bit>
-#include <chrono>
 #include <cstddef>
 #include <cstdint>
 #include <cstdlib>
@@ -9,7 +8,6 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
-#include <ratio>
 #include <string>
 #include <vector>
 
