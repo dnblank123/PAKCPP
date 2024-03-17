@@ -11,11 +11,7 @@
 #include <string>
 #include <vector>
 
-#include "src/zopfli/zopfli.h"
-
-#ifdef _MSC_VER
-#pragma comment(lib, "zopfli.lib")
-#endif
+#include "zopfli.h"
 
 void GetFilesFolderAndCompress(std::filesystem::path& FileLoc);
 
