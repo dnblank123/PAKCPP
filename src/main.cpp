@@ -170,6 +170,5 @@ int main(int argc, char** argv)
     argvpath = argv[1];
     GetFilesFolderAndCompress(argvpath);
 
-
     return 0;
 }

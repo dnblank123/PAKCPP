@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\utils\compress.cpp" />
-    <ClCompile Include="src\utils\filesystem.cpp" />
+    <ClCompile Include="src\utils\filesys.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
@@ -29,7 +29,7 @@
   <ItemGroup>
     <ClInclude Include="src\utils\compress.h" />
     <ClInclude Include="src\utils\filestruct.h" />
-    <ClInclude Include="src\utils\filesystem.h" />
+    <ClInclude Include="src\utils\filesys.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -97,7 +97,7 @@
     <OutDir>$(SolutionDir)</OutDir>
     <IncludePath>$(MSBuildProjectDirectory)\zopfli\src\zopfli;$(MSBuildProjectDirectory)\src\utils;$(IncludePath)</IncludePath>
     <LibraryPath>$(MSBuildProjectDirectory)\x64\Release;$(LibraryPath)</LibraryPath>
-    <ClangTidyChecks>*,-abseil-*,-altera-*,-android-*,-fuchsia-*,-google-*,-llvm*,-modernize-use-trailing-return-type,-zircon-*,-readability-else-after-return,-readability-static-accessed-through-instance,-readability-avoid-const-params-in-decls,-cppcoreguidelines-non-private-member-variables-in-classes,-misc-non-private-member-variables-in-classes,-clang-diagnostic-c++98-compat,-clang-diagnostic-unknown-pragmas</ClangTidyChecks>
+    <ClangTidyChecks>*,-abseil-*,-altera-*,-android-*,-fuchsia-*,-google-*,-llvm*,-modernize-use-trailing-return-type,-zircon-*,-readability-else-after-return,-readability-static-accessed-through-instance,-readability-avoid-const-params-in-decls,-cppcoreguidelines-non-private-member-variables-in-classes,-misc-non-private-member-variables-in-classes,-clang-diagnostic-c++98-compat,-clang-diagnostic-unknown-pragmas,-clang-diagnostic-c++98-*,-clang-diagnostic-pre-c++17-*,-clang-diagnostic-pragma-once-outside-header</ClangTidyChecks>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -162,7 +162,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(MSBuildProjectDirectory)\x64\Release;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(MSBuildProjectDirectory)\x64\Release\zopfli.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

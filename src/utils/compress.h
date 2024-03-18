@@ -2,6 +2,6 @@
 
 namespace Compress{
 
-	void File(ContentFiles *files);
+	void File(ContentFiles &Files);
 
 }

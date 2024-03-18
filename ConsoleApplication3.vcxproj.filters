@@ -24,7 +24,7 @@
     <ClCompile Include="src\utils\compress.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\utils\filesystem.cpp">
+    <ClCompile Include="src\utils\filesys.cpp">
       <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClInclude Include="src\utils\filestruct.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\utils\filesystem.h">
+    <ClInclude Include="src\utils\filesys.h">
       <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
