@@ -57,7 +57,6 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
             header.filecount++;
         }
     }
-    //https://godbolt.org/z/zbzMe6Pjq
     tempalloc.tempbuffer.reserve(316 * header.filecount);
     contentfiles.pathemptybytes.reserve(256 * header.filecount);
 
@@ -82,7 +81,7 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
             contentfiles.pathemptybytes.resize(256 - path.length());
 
             //TODO: fix naming
-            stream.read(std::bit_cast<char*>(contentfiles.incompress.data()), static_cast<uint32_t>(contentfiles.filesize));
+            stream.read(std::bit_cast<char*>(contentfiles.incompress.data()), contentfiles.filesize);
 
             contentfiles.filepos = static_cast<uint32_t>(file.tellp());
                 
@@ -91,8 +90,6 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 
             //std::cout << "size: " << tempalloc.tempbuffer.size() << " capacity: " << tempalloc.tempbuffer.capacity() << '\n';
             //auto timer1 = std::chrono::high_resolution_clock::now();
-            //https://quick-bench.com/q/KMXsMnOk321ybMDSdoNTpqFW9t0 to fix
-            //https://quick-bench.com/q/hACh6BWUzfBptIe39H9LPLlfhBA
                 
             std::copy(path.begin(), 
                         path.end(), 
@@ -147,9 +144,9 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
     file.seekp(256);
     file.write(std::bit_cast<char*>(&header.unknown), sizeof(header.unknown));
     file.seekp(260);
-    file.write(std::bit_cast<char*>(&header.filecount), sizeof(static_cast<uint32_t>(header.filecount)));
+    file.write(std::bit_cast<char*>(&header.filecount), sizeof(header.filecount));
     file.seekp(264);
-    file.write(std::bit_cast<char*>(&header.fileindex), sizeof(static_cast<uint32_t>(header.fileindex)));
+    file.write(std::bit_cast<char*>(&header.fileindex), sizeof(header.fileindex));
     file.close();
 
     //std::cout << "size: " << tempalloc.tempbuffer.size() << " capacity: " << tempalloc.tempbuffer.capacity() << '\n';
@@ -162,7 +159,7 @@ int main(int argc, char** argv)
 
     if (argc == 1 || argc > 2)
     {
-        std::cout << "Usage: pakcpp.exe folder" << '\n';
+        std::cout << "Usage: pakcpp.exe folder\n";
         std::quick_exit(0);
     }
 
