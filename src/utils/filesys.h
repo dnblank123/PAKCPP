@@ -1,18 +1,15 @@
 #pragma once
 
+#include <filesystem>
 #include <fstream>
 #include <string>
 
-namespace FileSys{
-
-	void GetFiles(const std::filesystem::path &FileLocation, ContentFiles &Files);
-}
+#include "filestruct.h"
 
 class FileStream {
 public:
-    void OpenFile(const std::string &FilePath);
-    void CloseFile();
+	void File(const std::filesystem::path &FileLocation, ContentFiles &Files);
 private:
     std::ifstream InFile;
-    std::ofstream OutFiles;
+    std::ofstream OutFile;
 };

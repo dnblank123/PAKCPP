@@ -17,7 +17,7 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc);
 
 struct Header {
     std::string filesignature = "EyedentityGames Packing File 0.1";
-    size_t filecount = 0;
+    uint32_t filecount = 0;
     static constexpr uint8_t unknown = 11;
     std::array<const char, 1024> headerbytes = {};
     size_t fileindex = 0;
@@ -28,8 +28,8 @@ struct ContentFiles {
     size_t compressedsize = 0;
     unsigned char* compressedbuffer = nullptr;
     std::vector<char> pathemptybytes = {};
-    size_t filepos = 0;
-    size_t filesize = 0;
+    uint32_t filepos = 0;
+    uint32_t filesize = 0;
     std::array<uint8_t, 44> emptybytes = {};
 };
 
@@ -57,7 +57,7 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
             header.filecount++;
         }
     }
-
+    //https://godbolt.org/z/zbzMe6Pjq
     tempalloc.tempbuffer.reserve(316 * header.filecount);
     contentfiles.pathemptybytes.reserve(256 * header.filecount);
 
@@ -74,24 +74,26 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 
             stream.open(filepath, std::ios::binary);
             stream.seekg(0, std::ios::end);
-            contentfiles.filesize = static_cast<size_t>(stream.tellg());
+            contentfiles.filesize = static_cast<uint32_t>(stream.tellg());
             stream.seekg(0, std::ios::beg);
 
-            contentfiles.incompress.reserve(contentfiles.filesize);
+            contentfiles.incompress.resize(contentfiles.filesize);
 
             contentfiles.pathemptybytes.resize(256 - path.length());
 
             //TODO: fix naming
             stream.read(std::bit_cast<char*>(contentfiles.incompress.data()), static_cast<uint32_t>(contentfiles.filesize));
 
-            contentfiles.filepos = static_cast<size_t>(file.tellp());
+            contentfiles.filepos = static_cast<uint32_t>(file.tellp());
                 
             ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, contentfiles.incompress.data(), contentfiles.filesize, &contentfiles.compressedbuffer, &contentfiles.compressedsize);
             file.write(std::bit_cast<const char*>(contentfiles.compressedbuffer), static_cast<uint32_t>(contentfiles.compressedsize));
 
             //std::cout << "size: " << tempalloc.tempbuffer.size() << " capacity: " << tempalloc.tempbuffer.capacity() << '\n';
             //auto timer1 = std::chrono::high_resolution_clock::now();
-
+            //https://quick-bench.com/q/KMXsMnOk321ybMDSdoNTpqFW9t0 to fix
+            //https://quick-bench.com/q/hACh6BWUzfBptIe39H9LPLlfhBA
+                
             std::copy(path.begin(), 
                         path.end(), 
                             std::back_inserter(tempalloc.tempbuffer));
@@ -155,6 +157,7 @@ void GetFilesFolderAndCompress(std::filesystem::path& FileLoc)
 
 int main(int argc, char** argv)
 {
+    //auto timer1 = std::chrono::high_resolution_clock::now();
     std::filesystem::path argvpath;
 
     if (argc == 1 || argc > 2)
@@ -170,5 +173,10 @@ int main(int argc, char** argv)
     argvpath = argv[1];
     GetFilesFolderAndCompress(argvpath);
 
+    //auto timer2 = std::chrono::high_resolution_clock::now();
+
+    //const std::chrono::duration<double, std::milli> ms_double = timer2 - timer1;
+
+    //std::cout << "Time :  " << ms_double.count() << "ms" << '\n';
     return 0;
 }
