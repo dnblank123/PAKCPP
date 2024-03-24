@@ -5,11 +5,16 @@
 #include <fstream>
 #include <ios>
 #include <string>
+#include <iostream>
 
 #include "filestruct.h"
 #include "filesys.h"
 
 inline constexpr auto PATH_BYTES_RESIZE = 256;
+
+void FileStream::CloseFile() {
+    InFile.close();
+}
 
 void FileStream::File(const std::filesystem::path &FileLocation, ContentFiles &Files) {
     const std::string rootpath = FileLocation.string();
@@ -32,6 +37,8 @@ void FileStream::File(const std::filesystem::path &FileLocation, ContentFiles &F
             InFile.seekg(0, std::ios::beg);
 
             Files.pathemptybytes.resize(PATH_BYTES_RESIZE - path.length());
+            Files.incompress.reserve(Files.filesize);
+
             InFile.read(std::bit_cast<char*>(Files.incompress.data()), static_cast<std::uint32_t>(Files.filesize));
 
             Files.filepos = static_cast<std::uint32_t>(OutFile.tellp());

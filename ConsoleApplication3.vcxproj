@@ -87,8 +87,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(MSBuildProjectDirectory)\x64\Debug;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(MSBuildProjectDirectory)\zopfli;$(IncludePath)</IncludePath>
+    <LibraryPath>$(MSBuildProjectDirectory)\x64\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(MSBuildProjectDirectory)\zopfli\src\zopfli;$(MSBuildProjectDirectory)\src\utils;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)</OutDir>
     <ClangTidyChecks>clang-analyzer-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,-cppcoreguidelines-avoid-magic-numbers,-cppcoreguidelines-avoid-non-const-global-variables,-clang-diagnostic-c++98-*,-modernize-use-trailing-return-type,-cppcoreguidelines-pro-type-vararg,-clang-diagnostic-format-security,-cppcoreguidelines-pro-type-union-access,-clang-diagnostic-unknown-pragmas,-cppcoreguidelines-pro-bounds-pointer-arithmetic</ClangTidyChecks>
     <EnableMicrosoftCodeAnalysis>true</EnableMicrosoftCodeAnalysis>
@@ -140,6 +140,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(MSBuildProjectDirectory)\x64\Release\zopfli.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
