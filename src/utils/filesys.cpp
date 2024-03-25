@@ -12,18 +12,12 @@
 
 inline constexpr auto PATH_BYTES_RESIZE = 256;
 
-void FileStream::CloseFile() {
-    InFile.close();
-}
-
-void FileStream::File(const std::filesystem::path &FileLocation, ContentFiles &Files) {
+void FileStream::File(const std::filesystem::path& FileLocation, ContentFiles& Files, Header& Head) {
     const std::string rootpath = FileLocation.string();
 
-    OutFile.open("00Resource.pak", std::ios::binary | std::ios::out | std::ios::app);
-
-    for (auto const& dir_entry : std::filesystem::recursive_directory_iterator{ FileLocation }) {
+    for (auto const &dir_entry : std::filesystem::recursive_directory_iterator{ FileLocation }) {
         if (dir_entry.path().has_extension()) {
-
+            Head.filecount++;
             const std::filesystem::path &filepath = dir_entry.path();
             std::string path = filepath.string();
             if (path.find(rootpath) == 0) {
@@ -41,9 +35,21 @@ void FileStream::File(const std::filesystem::path &FileLocation, ContentFiles &F
 
             InFile.read(std::bit_cast<char*>(Files.incompress.data()), static_cast<std::uint32_t>(Files.filesize));
 
-            Files.filepos = static_cast<std::uint32_t>(OutFile.tellp());
-
         }
         InFile.close();
     }
+}
+
+void FileStream::WriteHeadFile(Header& Head) {
+    OutFile.open("00Resource.pak", std::ios_base::binary | std::ios_base::in);
+    OutFile.write(Head.headerbytes.data(), Head.headerbytes.size());
+    OutFile.seekp(0);
+    OutFile.write(Head.filesignature, strlen(Head.filesignature));
+    OutFile.seekp(256);
+    OutFile.write(std::bit_cast<char*>(&Head.unknown), sizeof(Head.unknown));
+    OutFile.seekp(260);
+    OutFile.write(std::bit_cast<char*>(&Head.filecount), sizeof(static_cast<uint32_t>(Head.filecount)));
+    OutFile.seekp(264);
+    OutFile.write(std::bit_cast<char*>(&Head.fileindex), sizeof(static_cast<uint32_t>(Head.fileindex)));
+    OutFile.close();
 }

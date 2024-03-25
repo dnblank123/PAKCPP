@@ -7,8 +7,8 @@
 
 class FileStream {
 public:
-    void File(const std::filesystem::path &FileLocation, ContentFiles &Files);
-    void CloseFile();
+    void File(const std::filesystem::path& FileLocation, ContentFiles& Files, Header& Head);
+    void WriteHeadFile(Header& Head);
 private:
     std::ifstream InFile;
     std::ofstream OutFile;

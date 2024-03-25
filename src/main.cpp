@@ -1,5 +1,4 @@
-﻿
-#include <cstdlib>
+﻿#include <cstdlib>
 #include <filesystem>
 
 #include <iostream>
@@ -30,10 +29,11 @@ int main(int argc, char** argv) {
         std::filesystem::remove("00Resource.pak");
     }
 
-    fstrm.File(argvpath, cofi);
+    fstrm.File(argvpath, cofi, head);
+    
+    fstrm.WriteHeadFile(head);
 
-    std::cout << cofi.incompress.data();
-    std::cout << cofi.filesize;
+    //Compress::CompFile(cofi);
 
     return 0;
 }

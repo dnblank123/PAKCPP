@@ -1,7 +1,7 @@
 #pragma once
 
+#include "filestruct.h"
+
 namespace Compress{
-
-	void File(ContentFiles &Files);
-
+	void CompFile(ContentFiles& Files);
 }
