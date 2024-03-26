@@ -1,5 +1,3 @@
-#include <vector>
-
 #include "filestruct.h"
 #include "compress.h"
 
@@ -8,8 +6,7 @@
 //filesystem receives the path
 //filesystem.cpp iterate on the files, then calls Compress::File at main which receives a ?? then return a ??
 
-void Compress::CompFile(ContentFiles& Files)
-{
+void Compress::CompFile(ContentFiles& Files) {
     ZopfliOptions options;
 
     ZopfliInitOptions(&options);
@@ -17,7 +14,9 @@ void Compress::CompFile(ContentFiles& Files)
 
     ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, Files.incompress.data(), 
         Files.filesize, &Files.compressedbuffer, &Files.compressedsize);
+}
 
+void Compress::CompReset(ContentFiles& Files) {
     Files.incompress.clear();
     Files.compressedsize = 0;
     Files.compressedbuffer = nullptr;

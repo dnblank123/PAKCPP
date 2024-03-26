@@ -4,4 +4,5 @@
 
 namespace Compress{
 	void CompFile(ContentFiles& Files);
+	void CompReset(ContentFiles& Files);
 }

@@ -1,18 +1,18 @@
-﻿#include <cstdlib>
-#include <filesystem>
-
+﻿#include <filesystem>
+#include <fstream>
 #include <iostream>
 
-#include "filesys.h"
 #include "filestruct.h"
-#include "compress.h"
+#include "filesys.h"
 
 int main(int argc, char** argv) {
     FileStream fstrm;
     ContentFiles cofi;
     Header head;
+    TempAlloc tmpall;
 
     std::filesystem::path argvpath;
+    std::ofstream{"00Resource.pak"};
 
 #ifdef NDEBUG
     if (argc == 1 || argc > 2) {
@@ -29,11 +29,9 @@ int main(int argc, char** argv) {
         std::filesystem::remove("00Resource.pak");
     }
 
-    fstrm.File(argvpath, cofi, head);
-    
-    fstrm.WriteHeadFile(head);
+    fstrm.File(argvpath, cofi, head, tmpall);
 
-    //Compress::CompFile(cofi);
+    fstrm.WriteHeadFile(head);
 
     return 0;
 }

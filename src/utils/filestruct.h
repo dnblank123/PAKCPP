@@ -1,9 +1,7 @@
 #pragma once
 
-#include <string_view>
 #include <vector>
 #include <array>
-#include <cstdlib>
 #include <cstdint>
 
 inline constexpr auto HEADER_EMPTY_BYTES = 1024;
