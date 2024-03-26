@@ -6,7 +6,9 @@
 
 # TODO
 - Rewrite for better code
-- ~Use ZSTD for more high ratio compression~ cant
+    - ~Move other code to another file~ Done
+    - Constexpr code
+- ~Use ZSTD for more high ratio compression~ Different Header
 - GUI (ImGUI) for practice.
 
 <br/>
