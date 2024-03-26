@@ -31,7 +31,5 @@ int main(int argc, char** argv) {
 
     fstrm.File(argvpath, cofi, head, tmpall);
 
-    fstrm.WriteHeadFile(head);
-
     return 0;
 }

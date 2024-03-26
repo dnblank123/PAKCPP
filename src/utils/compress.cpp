@@ -14,6 +14,22 @@ void Compress::CompFile(ContentFiles& Files) {
 
     ZopfliCompress(&options, ZOPFLI_FORMAT_ZLIB, Files.incompress.data(), 
         Files.filesize, &Files.compressedbuffer, &Files.compressedsize);
+
+    //For MrKrzYch00 zopfli
+   
+    //ZopfliOptions options;
+    //ZopfliInitOptions(&options);
+    //options.numiterations = 100;
+    //options.numthreads = threads;
+    //options.blocksplittingmax = 0;
+    //options.mode = 0x0004;
+    //ZopfliPredefinedSplits splits;
+    //splits.splitpoints = 0;
+    //splits.npoints = 0;
+
+    //ZopfliZlibCompress(&options, Files.incompress.data(), Files.filesize, 
+    //    &Files.compressedbuffer, &Files.compressedsize, &splits);
+
 }
 
 void Compress::CompReset(ContentFiles& Files) {

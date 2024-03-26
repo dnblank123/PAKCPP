@@ -1,9 +1,11 @@
 #include <algorithm>
 #include <bit>
 #include <cstdint>
+#include <cstring>
 #include <filesystem>
 #include <fstream>
 #include <ios>
+#include <iterator>
 #include <string>
 
 #include "compress.h"
@@ -60,17 +62,19 @@ void FileStream::File(const std::filesystem::path& FileLocation, ContentFiles& F
     Head.fileindex = static_cast<std::uint32_t>(OutFile.tellp());
     OutFile.write(std::bit_cast<const char*>(TmpAll.tempbuffer.data()), std::bit_cast<std::streamsize>(TmpAll.tempbuffer.size()));
     OutFile.close();
+
+    WriteHeadFile(Head);
 }
 
 void FileStream::WriteHeadFile(Header& Head) {
     OutFile.open("00Resource.pak", std::ios_base::binary | std::ios_base::in);
-    OutFile.write(Head.filesignature, strlen(Head.filesignature));
+    OutFile.write(Head.filesignature, std::strlen(Head.filesignature));
     OutFile.seekp(256);
     OutFile.write(std::bit_cast<char*>(&Head.unknown), sizeof(Head.unknown));
     OutFile.seekp(260);
-    OutFile.write(std::bit_cast<char*>(&Head.filecount), sizeof(static_cast<uint32_t>(Head.filecount)));
+    OutFile.write(std::bit_cast<char*>(&Head.filecount), sizeof(static_cast<std::uint32_t>(Head.filecount)));
     OutFile.seekp(264);
-    OutFile.write(std::bit_cast<char*>(&Head.fileindex), sizeof(static_cast<uint32_t>(Head.fileindex)));
+    OutFile.write(std::bit_cast<char*>(&Head.fileindex), sizeof(static_cast<std::uint32_t>(Head.fileindex)));
     OutFile.close();
 }
 
@@ -84,19 +88,19 @@ void FileStream::CopyInfo(ContentFiles& Files, TempAlloc& TmpAll, std::string& P
         std::back_inserter(TmpAll.tempbuffer));
 
     std::copy(std::bit_cast<const char*>(&Files.compressedsize),
-        std::bit_cast<const char*>(&Files.compressedsize) + sizeof(uint32_t),
+        std::bit_cast<const char*>(&Files.compressedsize) + sizeof(std::uint32_t),
         std::back_inserter(TmpAll.tempbuffer));
 
     std::copy(std::bit_cast<const char*>(&Files.filesize),
-        std::bit_cast<const char*>(&Files.filesize) + sizeof(uint32_t),
+        std::bit_cast<const char*>(&Files.filesize) + sizeof(std::uint32_t),
         std::back_inserter(TmpAll.tempbuffer));
 
     std::copy(std::bit_cast<const char*>(&Files.compressedsize),
-        std::bit_cast<const char*>(&Files.compressedsize) + sizeof(uint32_t),
+        std::bit_cast<const char*>(&Files.compressedsize) + sizeof(std::uint32_t),
         std::back_inserter(TmpAll.tempbuffer));
 
     std::copy(std::bit_cast<const char*>(&Files.filepos),
-        std::bit_cast<const char*>(&Files.filepos) + sizeof(uint32_t),
+        std::bit_cast<const char*>(&Files.filepos) + sizeof(std::uint32_t),
         std::back_inserter(TmpAll.tempbuffer));
 
     std::copy(Files.emptybytes.begin(),
