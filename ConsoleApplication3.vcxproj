@@ -20,9 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\utils\compress.cpp" />
+    <ClCompile Include="src\utils\filesys.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\utils\compress.h" />
+    <ClInclude Include="src\utils\filestruct.h" />
+    <ClInclude Include="src\utils\filesys.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -85,7 +92,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)</OutDir>
-    <IncludePath>$(MSBuildProjectDirectory)\zopfli;$(IncludePath)</IncludePath>
+    <IncludePath>$(MSBuildProjectDirectory)\zopfli\src\zopfli;$(MSBuildProjectDirectory)\src\utils;$(IncludePath)</IncludePath>
     <LibraryPath>$(MSBuildProjectDirectory)\x64\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

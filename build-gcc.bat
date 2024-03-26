@@ -1,0 +1,1 @@
+g++ -fdata-sections -ffunction-sections src\main.cpp src\utils\compress.cpp src\utils\filesys.cpp -Ofast -mavx -Izopfli\ -Isrc\utils\ -std=c++20 -Llib -lzopfli -lmcfgthread -o pakcpp.exe -Wl,--gc-sections
