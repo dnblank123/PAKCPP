@@ -13,6 +13,10 @@
 #include "filesys.h"
 
 inline constexpr auto PATH_BYTES_RESIZE = 256;
+inline constexpr auto UNKNOWN = 256;
+inline constexpr auto FILE_COUNT = 260;
+inline constexpr auto FILE_IDX = 264;
+inline constexpr auto TEMP_BUFFER = 316;
 
 void FileStream::File(const std::filesystem::path& FileLocation, ContentFiles& Files, Header& Head, TempAlloc& TmpAll) {
     const std::string rootpath = FileLocation.string();
@@ -27,8 +31,8 @@ void FileStream::File(const std::filesystem::path& FileLocation, ContentFiles& F
         }
     }
 
-    TmpAll.tempbuffer.reserve(316 * Head.filecount);
-    Files.pathemptybytes.reserve(256 * Head.filecount);
+    TmpAll.tempbuffer.reserve(TEMP_BUFFER * Head.filecount);
+    Files.pathemptybytes.reserve(PATH_BYTES_RESIZE * Head.filecount);
 
     for (auto const& dir_entry : std::filesystem::recursive_directory_iterator{ FileLocation }) {
         if (dir_entry.path().has_extension()) {
@@ -69,16 +73,16 @@ void FileStream::File(const std::filesystem::path& FileLocation, ContentFiles& F
 void FileStream::WriteHeadFile(Header& Head) {
     OutFile.open("00Resource.pak", std::ios_base::binary | std::ios_base::in);
     OutFile.write(Head.filesignature, std::strlen(Head.filesignature));
-    OutFile.seekp(256);
+    OutFile.seekp(UNKNOWN);
     OutFile.write(std::bit_cast<char*>(&Head.unknown), sizeof(Head.unknown));
-    OutFile.seekp(260);
+    OutFile.seekp(FILE_COUNT);
     OutFile.write(std::bit_cast<char*>(&Head.filecount), sizeof(static_cast<std::uint32_t>(Head.filecount)));
-    OutFile.seekp(264);
+    OutFile.seekp(FILE_IDX);
     OutFile.write(std::bit_cast<char*>(&Head.fileindex), sizeof(static_cast<std::uint32_t>(Head.fileindex)));
     OutFile.close();
 }
 
-void FileStream::CopyInfo(ContentFiles& Files, TempAlloc& TmpAll, std::string& PathName) {
+constexpr void FileStream::CopyInfo(ContentFiles& Files, TempAlloc& TmpAll, std::string& PathName) {
     std::copy(PathName.begin(),
         PathName.end(),
         std::back_inserter(TmpAll.tempbuffer));

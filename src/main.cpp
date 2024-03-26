@@ -1,4 +1,5 @@
-﻿#include <filesystem>
+﻿#include <cstdlib>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 
@@ -12,7 +13,9 @@ int main(int argc, char** argv) {
     TempAlloc tmpall;
 
     std::filesystem::path argvpath;
-    std::ofstream{"00Resource.pak"};
+    {
+        std::ofstream{"00Resource.pak"};
+    }
 
 #ifdef NDEBUG
     if (argc == 1 || argc > 2) {
