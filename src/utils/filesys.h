@@ -13,7 +13,7 @@ public:
     void File(const std::filesystem::path& FileLocation, ContentFiles& Files, Header& Head, TempAlloc& TmpAll);
 private:
     void WriteHeadFile(Header& Head);
-    static constexpr void CopyInfo(ContentFiles& Files, TempAlloc& TmpAll, std::string& PathName);
+    void CopyInfo(ContentFiles& Files, TempAlloc& TmpAll, std::string& PathName);
     std::ifstream InFile;
     std::ofstream OutFile;
 };

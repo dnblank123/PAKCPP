@@ -82,7 +82,7 @@ void FileStream::WriteHeadFile(Header& Head) {
     OutFile.close();
 }
 
-constexpr void FileStream::CopyInfo(ContentFiles& Files, TempAlloc& TmpAll, std::string& PathName) {
+void FileStream::CopyInfo(ContentFiles& Files, TempAlloc& TmpAll, std::string& PathName) {
     std::copy(PathName.begin(),
         PathName.end(),
         std::back_inserter(TmpAll.tempbuffer));
