@@ -113,11 +113,11 @@ endif()
 #
 # zopfli
 #
-add_executable(zopfli src/zopfli/zopfli_bin.c)
-target_link_libraries(zopfli libzopfli)
-if(MSVC)
-  target_compile_definitions(zopfli PRIVATE _CRT_SECURE_NO_WARNINGS)
-endif()
+# add_executable(zopfli src/zopfli/zopfli_bin.c)
+# target_link_libraries(zopfli libzopfli)
+# if(MSVC)
+#   target_compile_definitions(zopfli PRIVATE _CRT_SECURE_NO_WARNINGS)
+# endif()
 
 
 # Create aliases
@@ -126,7 +126,7 @@ endif()
 # same names as in the config file package.
 if(NOT CMAKE_VERSION VERSION_LESS 3.0)
   add_library(Zopfli::libzopfli ALIAS libzopfli)
-  add_executable(Zopfli::zopfli ALIAS zopfli)
+  # add_executable(Zopfli::zopfli ALIAS zopfli)
 endif()
 
 #
@@ -134,7 +134,7 @@ endif()
 #
 if(ZOPFLI_BUILD_INSTALL)
   # Install binaries, libraries, and headers
-  install(TARGETS libzopfli zopfli
+  install(TARGETS libzopfli
     EXPORT ZopfliTargets
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef FILESTRUCT_HPP
+#define FILESTRUCT_HPP
 
 #include <array>
 #include <cstddef>
@@ -29,3 +30,5 @@ struct ContentFiles {
 struct TempAlloc {
     std::vector<char> tempbuffer{};
 };
+
+#endif

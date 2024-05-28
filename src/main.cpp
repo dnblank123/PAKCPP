@@ -3,8 +3,8 @@
 #include <fstream>
 #include <iostream>
 
-#include "filestruct.h"
-#include "filesys.h"
+#include "filestruct.hpp"
+#include "filesys.hpp"
 
 int main(int argc, char** argv) {
     FileStream fstrm;
