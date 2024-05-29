@@ -7,7 +7,7 @@
 #include "filesys.hpp"
 
 int main(int argc, char** argv) {
-    FileStream fstrm;
+    fs::FileStream fstrm;
     ContentFiles cofi;
     Header head;
     TempAlloc tmpall;

@@ -1,17 +1,33 @@
-# Dragon Nest PAK
-- Compressed using zopfli.
+# Dragon Nest ZoPAK
+Compressed PAK using [Zopfli](https://github.com/MrKrzYch00/zopfli).
 
-<br/>
+## Requirements
+- [CMake 3.10 or newer](https://cmake.org/)
+- [Visual Studio](https://visualstudio.microsoft.com/) or [GCC/Clang](https://winlibs.com/)
 
+## Build instruction for Visual Studio
+```
+mkdir build
+cd build
+cmake ..
+```
+Then open the .sln in `build` folder and compile.
 
-# TODO
-- Rewrite for better code
-- ~Use ZSTD for more high ratio compression~ cant
-- GUI (ImGUI) for practice.
+## Build instruction for Makefiles
+```
+mkdir build
+cd build
+cmake .. -G "MinGW Makefiles
+mingw32-make or make
+```
 
-<br/>
+## TODO
+- [ ] Rewrite for better code
+- ~Use ZSTD for more high ratio compression~ Different Headers
+- [ ] GUI (ImGUI/ImWindow) for practice purposes.
+- [ ] Fuzzing and Tests
+- [x] CMake tool
 
-
-# Special Thanks
+## Special Thanks
 - Vahr for the File Format
 > https://vincentzhang96.github.io/DragonNestFileFormats/files/pak/

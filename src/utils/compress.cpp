@@ -1,10 +1,10 @@
 #include "filestruct.hpp"
 #include "compress.hpp"
 
-#include "src\zopfli\zlib_container.h"
+#include "src/zopfli/zlib_container.h"
 
 namespace Compress {
-    void Compress::CompFile(ContentFiles& Files, unsigned int& threads) {
+    void CompFile(ContentFiles& Files, unsigned int& threads) {
         ZopfliOptions options;
         ZopfliInitOptions(&options);
         options.numiterations = 100;
@@ -21,7 +21,7 @@ namespace Compress {
 
     }
 
-    void Compress::CompReset(ContentFiles& Files) {
+    void CompReset(ContentFiles& Files) {
         Files.incompress.clear();
         Files.compressedsize = 0;
         Files.compressedbuffer = nullptr;

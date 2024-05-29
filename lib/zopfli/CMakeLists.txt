@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 3.10)
 
-project(Zopfli)
+project(Zopfli VERSION 0.0.0)
 
 # Check if Zopfli is the top-level project (standalone), or a subproject
 set(zopfli_standalone FALSE)
@@ -72,11 +72,14 @@ include(GNUInstallDirs)
 # libzopfli
 #
 add_library(libzopfli ${zopfli_library_type}
+  src/zopfli/adler.c
   src/zopfli/blocksplitter.c
   src/zopfli/cache.c
+  src/zopfli/crc32.c
   src/zopfli/deflate.c
   src/zopfli/gzip_container.c
   src/zopfli/hash.c
+  src/zopfli/inthandler.c
   src/zopfli/katajainen.c
   src/zopfli/lz77.c
   src/zopfli/squeeze.c
@@ -113,11 +116,11 @@ endif()
 #
 # zopfli
 #
-# add_executable(zopfli src/zopfli/zopfli_bin.c)
-# target_link_libraries(zopfli libzopfli)
-# if(MSVC)
-#   target_compile_definitions(zopfli PRIVATE _CRT_SECURE_NO_WARNINGS)
-# endif()
+add_executable(zopfli src/zopfli/zopfli_bin.c)
+target_link_libraries(zopfli libzopfli)
+if(MSVC)
+  target_compile_definitions(zopfli PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif()
 
 
 # Create aliases
@@ -126,7 +129,7 @@ endif()
 # same names as in the config file package.
 if(NOT CMAKE_VERSION VERSION_LESS 3.0)
   add_library(Zopfli::libzopfli ALIAS libzopfli)
-  # add_executable(Zopfli::zopfli ALIAS zopfli)
+  add_executable(Zopfli::zopfli ALIAS zopfli)
 endif()
 
 #

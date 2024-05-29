@@ -4,7 +4,7 @@
 #include "filestruct.hpp"
 
 namespace Compress{
-	void CompFile(const ContentFiles& Files, unsigned int& threads);
+	void CompFile(ContentFiles& Files, unsigned int& threads);
 	void CompReset(ContentFiles& Files);
 }
 
