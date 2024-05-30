@@ -1,23 +1,15 @@
-# Dragon Nest ZoPAK
+# Dragon Nest ZPAK
 Compressed PAK using [Zopfli](https://github.com/MrKrzYch00/zopfli).
 
 ## Requirements
 - [CMake 3.10 or newer](https://cmake.org/)
-- [Visual Studio](https://visualstudio.microsoft.com/) or [GCC/Clang](https://winlibs.com/)
+- [GCC/Clang](https://winlibs.com/)
 
-## Build instruction for Visual Studio
+## Build instruction for GCC/Clang
 ```
 mkdir build
 cd build
-cmake ..
-```
-Then open the .sln in `build` folder and compile.
-
-## Build instruction for Makefiles
-```
-mkdir build
-cd build
-cmake .. -G "MinGW Makefiles
+cmake .. -G "MinGW Makefiles"
 mingw32-make or make
 ```
 
