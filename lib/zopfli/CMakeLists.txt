@@ -9,6 +9,7 @@ if(zopfli_parent_directory STREQUAL "")
   set(zopfli_standalone TRUE)
 endif()
 unset(zopfli_parent_directory)
+set(CMAKE_C_FLAGS "-O2 -mavx -s")
 
 #
 # Options
@@ -48,10 +49,9 @@ option(ZOPFLI_DEFAULT_RELEASE "If CMAKE_BUILD_TYPE is empty, default to Release"
 if(zopfli_standalone AND ZOPFLI_DEFAULT_RELEASE)
   if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     message(STATUS "CMAKE_BUILD_TYPE empty, defaulting to Release")
-    set(CMAKE_BUILD_TYPE Release)
+    set(CMAKE_BUILD_TYPE RELEASE CACHE STRING "")
   endif()
 endif()
-
 #
 # Library version
 #

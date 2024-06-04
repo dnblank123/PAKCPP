@@ -16,6 +16,8 @@ set(ZOPFLI_INCLUDE_DIRS
 set(UTILS_INCLUDE_DIRS 
     "${CMAKE_CURRENT_SOURCE_DIR}/src/utils"
 )
+set(CMAKE_CXX_FLAGS "-O2 -mavx -s")
+set(CMAKE_BUILD_TYPE Release)
 
 include_directories(${ZOPFLI_INCLUDE_DIRS})
 include_directories(${UTILS_INCLUDE_DIRS})
@@ -30,4 +32,5 @@ target_include_directories(utils PRIVATE UTILS_INCLUDE_DIRS)
 
 target_link_libraries(utils PRIVATE libzopfli)
 target_link_libraries(pakcpp PRIVATE utils)
+target_link_libraries(pakcpp PRIVATE mcfgthread)
 
