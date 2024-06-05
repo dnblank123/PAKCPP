@@ -72,7 +72,7 @@ This is so because longest match finding has to find the exact distance
 that belongs to each length for the best lz77 strategy.
 Good values: 7, 8, 9.
 */
-#define ZOPFLI_CACHE_LENGTH 8
+#define ZOPFLI_CACHE_LENGTH 10
 
 /*
 To limit maximum memory usage by cache, let's use maximum 512MB.
